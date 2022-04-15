@@ -17,12 +17,10 @@ public class UnitBase : MonoBehaviour
     public float maxXp = 100f;
     public float manaRegen = 0;
     public float att = 10f;
-    public float critChance = 10;
-    public float critMultiplier = 0.5f;
     public float def = 2f;
     public float spellRes = 0.15f;
-    public float movSpeed = 1f;
     public float attSpeed = 1f;
+    public float turnGauge = 0f;
 
     [Header("Growth Stat")]
     public float growthHp;
