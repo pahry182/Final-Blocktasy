@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b73e2489109e2cc4abb12530dc293772, type: 3}
+  m_Name: Beta Block
+  m_EditorClassIdentifier: 
+  unitName: Beta Block
+  unitLevel: 0
+  currentHp: 0
+  currentShd: 0
+  currentMp: 0
+  currentXp: 0
+  maxHp: 0
+  maxShd: 0
+  maxMp: 0
+  maxXp: 0
+  manaRegen: 0
+  att: 0
+  def: 0
+  spellRes: 0
+  attSpeed: 0

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1806150316797892602
+--- !u!1 &4690306849994179011
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,102 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1806150316797892601}
-  - component: {fileID: 1806150316797892600}
-  - component: {fileID: 3206649050220971142}
+  - component: {fileID: 4690306849994179013}
+  - component: {fileID: 3325078041213859597}
   m_Layer: 0
-  m_Name: Sprite
-  m_TagString: Enemy
+  m_Name: Lapis
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1806150316797892601
+--- !u!4 &4690306849994179013
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806150316797892602}
+  m_GameObject: {fileID: 4690306849994179011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4690306850368388871}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3325078041213859597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690306849994179011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089b216e7a1ba944196dd3cda75de2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Lapis
+  unitLevel: 1
+  currentHp: 100
+  currentShd: 0
+  currentMp: 100
+  currentXp: 0
+  maxHp: 100
+  maxMp: 100
+  maxXp: 100
+  manaRegen: 0
+  att: 10
+  def: 2
+  spellRes: 0.15
+  attSpeed: 6
+  turnGauge: 0
+  growthHp: 0
+  growthMp: 0
+  growthManaReg: 0
+  growthAtt: 0
+  growthDef: 0
+  isDead: 0
+--- !u!1 &4690306850368388868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4690306850368388871}
+  - component: {fileID: 4690306850368388870}
+  - component: {fileID: 445271881154096881}
+  m_Layer: 0
+  m_Name: Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4690306850368388871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690306850368388868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1806150316961676951}
+  m_Father: {fileID: 4690306849994179013}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1806150316797892600
+--- !u!212 &4690306850368388870
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806150316797892602}
+  m_GameObject: {fileID: 4690306850368388868}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -83,13 +148,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3206649050220971142
+--- !u!61 &445271881154096881
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806150316797892602}
+  m_GameObject: {fileID: 4690306850368388868}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -109,67 +174,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1806150316961676953
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1806150316961676951}
-  - component: {fileID: 1806150316961676952}
-  m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1806150316961676951
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806150316961676953}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1806150316797892601}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1806150316961676952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806150316961676953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 089b216e7a1ba944196dd3cda75de2a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Beta Block
-  unitLevel: 1
-  currentHp: 50
-  currentShd: 0
-  currentMp: 10
-  currentXp: 0
-  maxHp: 50
-  maxMp: 10
-  maxXp: 100
-  manaRegen: 0
-  att: 6
-  def: 1
-  spellRes: 0.15
-  attSpeed: 0.4
-  turnGauge: 0
-  growthHp: 0
-  growthMp: 0
-  growthManaReg: 0
-  growthAtt: 0
-  growthDef: 0

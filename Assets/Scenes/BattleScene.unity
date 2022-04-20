@@ -404,7 +404,7 @@ GameObject:
   m_Layer: 0
   m_Name: BattleController
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -434,7 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb6b5831c93750429927d159998ba54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
   player:
   - {fileID: 0}
   - {fileID: 0}
@@ -447,6 +446,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentUnitTurn: {fileID: 0}
+  singleTarget: {fileID: 0}
   enemyStations:
   - {fileID: 413743534}
   - {fileID: 1126084178}
@@ -933,6 +936,7 @@ GameObject:
   - component: {fileID: 137594982}
   - component: {fileID: 137594981}
   - component: {fileID: 137594980}
+  - component: {fileID: 137594983}
   m_Layer: 5
   m_Name: CommandHUD
   m_TagString: Untagged
@@ -1026,6 +1030,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137594978}
   m_CullTransparentMesh: 1
+--- !u!225 &137594983
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137594978}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &172430792
 GameObject:
   m_ObjectHideFlags: 0
@@ -3043,6 +3059,7 @@ GameObject:
   - component: {fileID: 787673055}
   - component: {fileID: 787673057}
   - component: {fileID: 787673056}
+  - component: {fileID: 787673058}
   m_Layer: 5
   m_Name: AnnounceHUD
   m_TagString: Untagged
@@ -3108,6 +3125,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787673054}
   m_CullTransparentMesh: 1
+--- !u!225 &787673058
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787673054}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &812894189
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,6 +3405,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831157389}
   m_CullTransparentMesh: 1
+--- !u!1 &870631022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 870631024}
+  - component: {fileID: 870631023}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &870631023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870631022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5249d6a21620643aae71d31ae3f7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio:
+    soundEffects: []
+    backgroundMusics: []
+    activeSfx: []
+    activeBgm: []
+  playerCharacters:
+  - {fileID: 3628533780253832985, guid: 1b5d5753443a7cb4fa1a0dd0e160a258, type: 3}
+  - {fileID: 4690306849994179011, guid: e3b3059b962ccaa439805cdf74f9e61e, type: 3}
+  - {fileID: 3462258617111996895, guid: 89cc741541258ca45a5d34a049603d60, type: 3}
+  - {fileID: 899874546407928839, guid: 1aab54b65bb8e4f40a7e200942264f5b, type: 3}
+--- !u!4 &870631024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870631022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &886167882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3458,7 +3540,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 886167885}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1995710839}
+        m_TargetAssemblyTypeName: BattleSceneController, Assembly-CSharp
+        m_MethodName: AttackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &886167885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7779,6 +7873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1850389438}
+  - component: {fileID: 1850389439}
   m_Layer: 5
   m_Name: DeckHUD
   m_TagString: Untagged
@@ -7808,6 +7903,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030518, y: -126.87}
   m_SizeDelta: {x: 572, y: 72.776}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1850389439
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850389437}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1872364965
 GameObject:
   m_ObjectHideFlags: 0
@@ -8243,6 +8350,7 @@ GameObject:
   - component: {fileID: 1995710837}
   - component: {fileID: 1995710836}
   - component: {fileID: 1995710835}
+  - component: {fileID: 1995710839}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8334,6 +8442,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1995710839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995710834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e632f264cf92e34fa709e155d2d36d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttacking: 0
+  deck: {fileID: 1850389439}
+  commandHUD: {fileID: 137594983}
+  announceHUD: {fileID: 787673058}
+  announceText: {fileID: 2027723538}
+  textDamage: {fileID: 6600752321560887235, guid: a8dc0253ff0a0bc438b7cc96dda0439a, type: 3}
 --- !u!1 &2027723536
 GameObject:
   m_ObjectHideFlags: 0
