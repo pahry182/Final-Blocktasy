@@ -119,8 +119,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1806150316961676951}
   - component: {fileID: 1806150316961676952}
+  - component: {fileID: 3287099212578827673}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Beta Block
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,13 +164,29 @@ MonoBehaviour:
   maxMp: 10
   maxXp: 100
   manaRegen: 0
-  att: 6
+  att: 45
+  mag: 1
   def: 1
   spellRes: 0.15
-  attSpeed: 0.4
+  attSpeed: 9
   turnGauge: 0
   growthHp: 0
   growthMp: 0
   growthManaReg: 0
   growthAtt: 0
   growthDef: 0
+  isDead: 0
+--- !u!114 &3287099212578827673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806150316961676953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8786e185e56e348b88c8035252a1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elapsedTurn: 0
+  isSkillCasted: 0

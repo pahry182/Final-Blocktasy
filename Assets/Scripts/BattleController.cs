@@ -124,20 +124,27 @@ public class BattleController : MonoBehaviour
         //}
     }
 
+    private void UpdateHPHUD(UnitBase unit)
+    {
+        if (unit.gameObject.tag != "Player") return;
+        int index = Array.IndexOf(player, unit);
+        textPlayerHps[index].text = player[index].currentHp.ToString();
+    }
+
     private void UpdateTurn()
     {
         if (!isSetupCompleted) return;
-        if ((State == BattleState.PLAYERTURN) || (State == BattleState.ENEMYTURN)) return;
+        if (State != BattleState.START) return;
 
         foreach (var item in enemy)
         {
-            if (item.turnGauge > 1000) return;
+            if (item.turnGauge > 1000 || item.isDead) continue;
             item.turnGauge += item.attSpeed + Time.deltaTime;
         }
         
         foreach (var item in player)
         {
-            if (item.turnGauge > 1000) return;
+            if (item.turnGauge > 1000 || item.isDead) continue;
             item.turnGauge += item.attSpeed + Time.deltaTime;
         }
 
@@ -150,26 +157,34 @@ public class BattleController : MonoBehaviour
     private void CheckTurn()
     {
         if (!isSetupCompleted) return;
-        if ((State == BattleState.PLAYERTURN) || (State == BattleState.ENEMYTURN)) return;
+        if (State != BattleState.START) return;
 
         foreach (var item in enemy)
         {
-            if (item.turnGauge >= 1000)
+            if (item.turnGauge >= 1000 && !item.isDead)
             {
                 currentUnitTurn = item;
+                currentUnitTurn.turnGauge = 0;
                 State = BattleState.ENEMYTURN;
+                var temp = currentUnitTurn.GetComponent<EnemyAI>();
+                temp.Act();
+
+                return;
             }
         }
 
         foreach (var item in player)
         {
-            if (item.turnGauge >= 1000)
+            if (item.turnGauge >= 1000 && !item.isDead)
             {
                 currentUnitTurn = item;
+                currentUnitTurn.turnGauge = 0;
                 State = BattleState.PLAYERTURN;
                 int index = Array.IndexOf(player, item);
                 playerGauges[index].GetComponent<Image>().color = Color.yellow;
                 BattleSceneController.Instance.OpenPlayerCommand();
+
+                return;
             }
         }
     }
@@ -188,15 +203,61 @@ public class BattleController : MonoBehaviour
         if (unit.currentHp < 1)
         {
             unit.isDead = true;
+            unit.currentHp = 0;
             StartCoroutine(unit.StartDie());
         }
+
+        UpdateHPHUD(unit);
     }
 
     public void EndTurn()
     {
-        currentUnitTurn.turnGauge = 0;
         int index = Array.IndexOf(player, currentUnitTurn);
         playerGauges[index].GetComponent<Image>().color = Color.white;
         State = BattleState.START;
+        CheckCondition();
+    }
+
+    public void EndTurnEnemy()
+    {
+        State = BattleState.START;
+        CheckCondition();
+    }
+
+    private void CheckCondition()
+    {
+        if (!isSetupCompleted) return;
+        if ((State == BattleState.WON) || (State == BattleState.LOST)) return;
+
+
+        int check = 0;
+        foreach (var item in enemy)
+        {
+            if (item.isDead || item == null)
+            {
+                check++;
+            }
+        }
+
+        if (check == enemy.Length)
+        {
+            State = BattleState.WON;
+            BattleSceneController.Instance.WonHUD();
+        }
+
+        int check2 = 0;
+        foreach (var item in player)
+        {
+            if (item.isDead || item == null)
+            {
+                check2++;
+            }
+        }
+
+        if (check2 == player.Length)
+        {
+            State = BattleState.LOST;
+            BattleSceneController.Instance.LoseHUD();
+        }
     }
 }

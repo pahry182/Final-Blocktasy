@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6731045094418547159}
   m_Layer: 0
   m_Name: Bond
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,8 @@ MonoBehaviour:
   maxMp: 100
   maxXp: 100
   manaRegen: 0
-  att: 28
+  att: 25
+  mag: 1
   def: 2
   spellRes: 0.15
   attSpeed: 8

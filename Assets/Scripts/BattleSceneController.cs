@@ -98,4 +98,14 @@ public class BattleSceneController : UIController
         temp.transform.DOJump(temp.transform.position, 1, 1, 0.5f);
         Destroy(temp, 1.5f);
     }
+
+    public void WonHUD()
+    {
+        OpenAnnounceHUD("Victory!");
+    }
+
+    public void LoseHUD()
+    {
+        OpenAnnounceHUD("Defeat");
+    }
 }

@@ -37,6 +37,7 @@ public class UnitBase : MonoBehaviour
 
     [Header("Technical")]
     public bool isDead;
+    public float xpLoot;
 
     public void Accept(IVisitor<UnitBase> visitor)
     {
@@ -65,8 +66,34 @@ public class UnitBase : MonoBehaviour
         BattleController.Instance.singleTarget.Accept(basicAttack);
 
         yield return new WaitForSeconds(2);
+        yield return new WaitForEndOfFrame();
 
         BattleController.Instance.EndTurn();
+    }
+
+    public IEnumerator EnemyBasicAttack()
+    {
+        var sr = GetComponentInChildren<SpriteRenderer>();
+        Sequence mySequence = DOTween.Sequence();
+        mySequence.Append(sr.DOColor(Color.black, 0.2f))
+          .Append(sr.DOColor(Color.white, 0.2f));
+
+        yield return new WaitForSeconds(0.5f);
+
+        PhysicalDamage basicAttack = new PhysicalDamage(this, att);
+        int select = Random.Range(0, BattleController.Instance.player.Length);
+
+        while (BattleController.Instance.player[select].isDead)
+        {
+            select = Random.Range(0, BattleController.Instance.player.Length);
+        }
+
+        BattleController.Instance.player[select].Accept(basicAttack);
+
+        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForEndOfFrame();
+
+        BattleController.Instance.EndTurnEnemy();
     }
 
     public IEnumerator StartDie()
