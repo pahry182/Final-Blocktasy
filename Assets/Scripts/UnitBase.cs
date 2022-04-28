@@ -8,6 +8,17 @@ public interface IVisitor<T> where T : UnitBase
     void Visit(T unit);
 }
 
+public enum ElementType
+{
+    Fire,
+    Water,
+    Lightning,
+    Ice,
+    Wind,
+    Earth,
+    Holy
+}
+
 public class UnitBase : MonoBehaviour
 {
     [Header("Basic Stat")]
@@ -38,6 +49,24 @@ public class UnitBase : MonoBehaviour
     [Header("Technical")]
     public bool isDead;
     public float xpLoot;
+    public List<string> learnedSpell;
+
+    [Header("Elemental Affinity")]
+    public float fireAtt;
+    public float waterAtt;
+    public float lightningAtt;
+    public float earthAtt;
+    public float windAtt;
+    public float iceAtt;
+    public float lightAtt;
+    [Header("Elemental Resistances")]
+    public float fireRes;
+    public float waterRes;
+    public float lightningRes;
+    public float earthRes;
+    public float windRes;
+    public float iceRes;
+    public float lightRes;
 
     public void Accept(IVisitor<UnitBase> visitor)
     {

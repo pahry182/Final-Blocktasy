@@ -54,7 +54,7 @@ MonoBehaviour:
   maxMp: 100
   maxXp: 100
   manaRegen: 0
-  att: 25
+  att: 55
   mag: 1
   def: 2
   spellRes: 0.15
@@ -66,6 +66,22 @@ MonoBehaviour:
   growthAtt: 0
   growthDef: 0
   isDead: 0
+  xpLoot: 0
+  learnedSpell: []
+  fireAtt: 0
+  waterAtt: 0
+  lightningAtt: 0
+  earthAtt: 0
+  windAtt: 0
+  iceAtt: 0
+  lightAtt: 0
+  fireRes: 0
+  waterRes: 0
+  lightningRes: 0
+  earthRes: 0
+  windRes: 0
+  iceRes: 0
+  lightRes: 0
 --- !u!1 &3462258617486087960
 GameObject:
   m_ObjectHideFlags: 0

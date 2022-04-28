@@ -124,13 +124,6 @@ public class BattleController : MonoBehaviour
         //}
     }
 
-    private void UpdateHPHUD(UnitBase unit)
-    {
-        if (unit.gameObject.tag != "Player") return;
-        int index = Array.IndexOf(player, unit);
-        textPlayerHps[index].text = player[index].currentHp.ToString();
-    }
-
     private void UpdateTurn()
     {
         if (!isSetupCompleted) return;
@@ -205,9 +198,38 @@ public class BattleController : MonoBehaviour
             unit.isDead = true;
             unit.currentHp = 0;
             StartCoroutine(unit.StartDie());
+            UpdateEnemyList(unit);
         }
 
-        UpdateHPHUD(unit);
+        UpdateHPHUDPlayer(unit);
+    }
+
+    private void UpdateHPHUDPlayer(UnitBase unit)
+    {
+        if (unit.gameObject.tag != "Player") return;
+
+        int index = Array.IndexOf(player, unit);
+        textPlayerHps[index].text = player[index].currentHp.ToString();
+    }
+
+    private void UpdateEnemyList(UnitBase unit)
+    {
+        if (unit.gameObject.tag != "Enemy") return;
+
+        int indexInTextNames = 0;
+
+        foreach (var item in textEnemyNames)
+        {
+            if (item.text == unit.unitName)
+            {
+                indexInTextNames = Array.IndexOf(textEnemyNames, item);
+                break;
+            }
+        }
+
+        print(textEnemyCounts[indexInTextNames].text);
+
+        string number = textEnemyCounts[indexInTextNames].text;
     }
 
     public void EndTurn()
@@ -228,7 +250,6 @@ public class BattleController : MonoBehaviour
     {
         if (!isSetupCompleted) return;
         if ((State == BattleState.WON) || (State == BattleState.LOST)) return;
-
 
         int check = 0;
         foreach (var item in enemy)

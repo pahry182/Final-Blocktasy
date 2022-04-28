@@ -54,7 +54,7 @@ MonoBehaviour:
   maxMp: 100
   maxXp: 100
   manaRegen: 0
-  att: 25
+  att: 55
   mag: 1
   def: 2
   spellRes: 0.15
@@ -66,6 +66,7 @@ MonoBehaviour:
   growthAtt: 0
   growthDef: 0
   isDead: 0
+  xpLoot: 0
 --- !u!1 &4690306850368388868
 GameObject:
   m_ObjectHideFlags: 0

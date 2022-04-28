@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public Data data = new Data();
     public Audio audio = new Audio();
     public Setting setting = new Setting();
-    public GameObject[] playerCharacters;
+    public GameObject[] playerCharacters, VFXs;
 
     private void Awake()
     {
@@ -22,6 +22,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public GameObject GetVFX(string name)
+    {
+        foreach (var item in VFXs)
+        {
+            if (item.name == name) return item;
+        }
+
+        return null;
     }
 
     public void PlaySfx(string name)
