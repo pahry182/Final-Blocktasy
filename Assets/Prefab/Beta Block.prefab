@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 318d062f34e98e543b2f21d9e718fc26, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4c06e290bd18ea24eb11c7eb1213bbc7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -172,11 +172,11 @@ MonoBehaviour:
   turnGauge: 0
   growthHp: 0
   growthMp: 0
-  growthManaReg: 0
+  growthMag: 0
   growthAtt: 0
   growthDef: 0
   isDead: 0
-  xpLoot: 0
+  xpLoot: 1200
   learnedSpell: []
   fireAtt: 0
   waterAtt: 0

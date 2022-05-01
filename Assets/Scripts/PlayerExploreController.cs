@@ -16,6 +16,11 @@ public class PlayerExploreController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         Move();

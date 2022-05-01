@@ -12,11 +12,12 @@ public class BattleSceneController : UIController
     public CanvasGroup battlePanel, winPanel;
     public CanvasGroup deck, commandHUD, announceHUD, magicHUD;
     public TextMeshProUGUI announceText;
-    public GameObject textDamage, targetAllButton;
+    public GameObject textDamage, targetAllButton, itemNameList, itemCountList;
+    public GameObject prefabItemName, prefabItemCount;
     public GameObject[] spellButtons;
 
     private BasicSpell basicSpell;
-    private string vfxName;
+    private string effectName;
     public bool isAttacking;
     public bool isTargetAllEnemy;
     
@@ -39,6 +40,14 @@ public class BattleSceneController : UIController
         commandHUD.gameObject.SetActive(false);
         announceHUD.gameObject.SetActive(false);
         winPanel.gameObject.SetActive(false);
+        foreach (Transform item in itemNameList.transform)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (Transform item in itemCountList.transform)
+        {
+            Destroy(item.gameObject);
+        }
     }
 
     private void Update()
@@ -90,6 +99,7 @@ public class BattleSceneController : UIController
                     Debug.Log("Enemy Selected");
                     CloseAnnounceHUD();
                     targetAllButton.SetActive(false);
+                    GameManager.Instance.PlaySfx("Button");
                 }
                 else
                 {
@@ -137,6 +147,20 @@ public class BattleSceneController : UIController
 
         CloseAnnounceHUD();
         StartCoroutine(FadeIn(winPanel, 0.3f));
+
+        yield return new WaitForSeconds(0.48f);
+
+        for (int i = 0; i < BattleController.Instance.lootGainedDict.Count; i++)
+        {
+            var temp = Instantiate(prefabItemName, itemNameList.transform);
+            temp.GetComponent<TextMeshProUGUI>().text = BattleController.EXP_GAINED;
+
+            yield return new WaitForSeconds(0.48f);
+
+            var temp2 = Instantiate(prefabItemCount, itemCountList.transform);
+            temp2.GetComponent<TextMeshProUGUI>().text = BattleController.Instance.lootGainedDict[BattleController.EXP_GAINED].ToString();
+        }
+        
     }
 
     public void OpenMagicCommand()
@@ -160,7 +184,7 @@ public class BattleSceneController : UIController
     public void FireSpellButton()
     {
         basicSpell = new BasicSpell(BattleController.Instance.currentUnitTurn, ElementType.Fire, 1);
-        vfxName = "FireVFX";
+        effectName = "Fire";
         ExecuteSpellCommand();
     }
 
@@ -178,14 +202,20 @@ public class BattleSceneController : UIController
     {
         yield return new WaitUntil(() => BattleSceneController.Instance.isAttacking == false);
 
+        Destroy(Instantiate(GameManager.Instance.GetVFX("CastVFX"), BattleController.Instance.currentUnitTurn.transform.position, Quaternion.identity), 2);
+        GameManager.Instance.PlaySfx("CastSFX");
+
+        yield return new WaitForSeconds(0.64f);
+
         if (isTargetAllEnemy)
         {
             foreach (var item in BattleController.Instance.enemy)
             {
                 if (!item.isDead)
                 {
-                    Destroy(Instantiate(GameManager.Instance.GetVFX(vfxName), item.transform.position, Quaternion.identity), 2);
-                    yield return new WaitForSeconds(0.128f);
+                    Destroy(Instantiate(GameManager.Instance.GetVFX(effectName + "VFX"), item.transform.position, Quaternion.identity), 2);
+                    GameManager.Instance.PlaySfx(effectName + "SFX");
+                    yield return new WaitForSeconds(0.256f);
                 }
             }
 
@@ -204,8 +234,11 @@ public class BattleSceneController : UIController
         }
         else
         {
-            Destroy(Instantiate(GameManager.Instance.GetVFX(vfxName), BattleController.Instance.singleTarget.transform.position, Quaternion.identity), 2);
+            Destroy(Instantiate(GameManager.Instance.GetVFX(effectName + "VFX"), BattleController.Instance.singleTarget.transform.position, Quaternion.identity), 2);
+            GameManager.Instance.PlaySfx(effectName + "SFX");
+
             yield return new WaitForSeconds(1);
+
             BattleController.Instance.singleTarget.Accept(basicSpell);
         }
 
@@ -216,6 +249,17 @@ public class BattleSceneController : UIController
 
     public void BackToExploreButton()
     {
+        StartCoroutine(ProceedEndBattle());        
+    }
+
+    private IEnumerator ProceedEndBattle()
+    {
+        
+
+        yield return new WaitForEndOfFrame();
+
         LoadScene("ExploreScene");
     }
+
+    
 }

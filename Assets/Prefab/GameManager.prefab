@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7724118931885407762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7724118931885407764}
+  - component: {fileID: 7724118931885407763}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7724118931885407764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724118931885407762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7724118931885407763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724118931885407762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5249d6a21620643aae71d31ae3f7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio:
+    soundEffects:
+    - name: FireSFX
+      clip: {fileID: 8300000, guid: 5ec50b818b4e5c94886476c9b6a3774c, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioSource: {fileID: 0}
+    - name: CastSFX
+      clip: {fileID: 8300000, guid: 8f4d46e56a50ff6459dde9d03a085089, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioSource: {fileID: 0}
+    - name: Button
+      clip: {fileID: 8300000, guid: d7d7f5664c16b1d4689c52cbf3624665, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioSource: {fileID: 0}
+    - name: ButtonBack
+      clip: {fileID: 8300000, guid: 7fe53dfae60b33644b37a6345c5931bb, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioSource: {fileID: 0}
+    - name: BasicAttack
+      clip: {fileID: 8300000, guid: 26014b63b0e54bc4d84dd7aec65f9b59, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioSource: {fileID: 0}
+    backgroundMusics:
+    - name: MainMenu
+      clip: {fileID: 8300000, guid: 89dd81b5c29595141aba5ed866612987, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 1
+      audioSource: {fileID: 0}
+    - name: BattleNormal
+      clip: {fileID: 8300000, guid: 82976dce05d42a34c9fbd9ad3f7949f3, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 1
+      audioSource: {fileID: 0}
+    - name: BattleBoss
+      clip: {fileID: 8300000, guid: d4521db5649b0f94fa3e89847d48672c, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 1
+      audioSource: {fileID: 0}
+    - name: BattleLoss
+      clip: {fileID: 8300000, guid: a57398ad1db9812468fa89e7db003bf9, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 1
+      audioSource: {fileID: 0}
+    - name: BattleWon
+      clip: {fileID: 8300000, guid: a57398ad1db9812468fa89e7db003bf9, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 1
+      audioSource: {fileID: 0}
+    activeSfx: []
+    activeBgm: []
+  playerCharacters:
+  - {fileID: 3628533780253832985, guid: 1b5d5753443a7cb4fa1a0dd0e160a258, type: 3}
+  - {fileID: 4690306849994179011, guid: e3b3059b962ccaa439805cdf74f9e61e, type: 3}
+  - {fileID: 3462258617111996895, guid: 89cc741541258ca45a5d34a049603d60, type: 3}
+  - {fileID: 899874546407928839, guid: 1aab54b65bb8e4f40a7e200942264f5b, type: 3}
+  VFXs:
+  - {fileID: 3141159628244207225, guid: 1dd22d70bf62e5d4f8090bf2d26a5aec, type: 3}
+  - {fileID: 1304039688668812610, guid: 9057fe1a5f3ca1840a741d8367d61855, type: 3}

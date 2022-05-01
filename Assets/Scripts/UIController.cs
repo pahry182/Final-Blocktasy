@@ -72,4 +72,13 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+
+    public void ButtonSFX()
+    {
+        GameManager.Instance.PlaySfx("Button");
+    }
+    public void ButtonBackSFX()
+    {
+        GameManager.Instance.PlaySfx("ButtonBack");
+    }
 }

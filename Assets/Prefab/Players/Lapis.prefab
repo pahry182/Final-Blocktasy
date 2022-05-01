@@ -60,13 +60,28 @@ MonoBehaviour:
   spellRes: 0.15
   attSpeed: 6
   turnGauge: 0
-  growthHp: 0
-  growthMp: 0
-  growthManaReg: 0
-  growthAtt: 0
-  growthDef: 0
+  growthHp: 52
+  growthMp: 24
+  growthMag: 5
+  growthAtt: 7
+  growthDef: 3
   isDead: 0
   xpLoot: 0
+  learnedSpell: []
+  fireAtt: 0
+  waterAtt: 0
+  lightningAtt: 0
+  earthAtt: 0
+  windAtt: 0
+  iceAtt: 0
+  lightAtt: 0
+  fireRes: 0
+  waterRes: 0
+  lightningRes: 0
+  earthRes: 0
+  windRes: 0
+  iceRes: 0
+  lightRes: 0
 --- !u!1 &4690306850368388868
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,13 +107,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4690306850368388868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2588191, w: 0.9659258}
+  m_LocalPosition: {x: 0.336, y: 0.155, z: 0}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_Children: []
   m_Father: {fileID: 4690306849994179013}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
 --- !u!212 &4690306850368388870
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -140,7 +155,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 318d062f34e98e543b2f21d9e718fc26, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.41960785, g: 0.5212224, b: 0.7254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

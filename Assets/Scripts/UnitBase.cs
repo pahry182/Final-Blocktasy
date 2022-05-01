@@ -42,13 +42,15 @@ public class UnitBase : MonoBehaviour
     [Header("Growth Stat")]
     public float growthHp;
     public float growthMp;
-    public float growthManaReg = 0;
+    public float growthMag = 0;
     public float growthAtt;
     public float growthDef;
 
     [Header("Technical")]
     public bool isDead;
     public float xpLoot;
+
+    [Header("Spell")]
     public List<string> learnedSpell;
 
     [Header("Elemental Affinity")]
@@ -87,12 +89,14 @@ public class UnitBase : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        GameManager.Instance.PlaySfx("BasicAttack");
         transform.DOMove(posLast, 0.4f);
 
         yield return new WaitForSeconds(0.5f);
 
         PhysicalDamage basicAttack = new PhysicalDamage(this, att);
         BattleController.Instance.singleTarget.Accept(basicAttack);
+        
 
         yield return new WaitForSeconds(2);
         yield return new WaitForEndOfFrame();
@@ -106,6 +110,7 @@ public class UnitBase : MonoBehaviour
         Sequence mySequence = DOTween.Sequence();
         mySequence.Append(sr.DOColor(Color.black, 0.2f))
           .Append(sr.DOColor(Color.white, 0.2f));
+        GameManager.Instance.PlaySfx("BasicAttack");
 
         yield return new WaitForSeconds(0.5f);
 
@@ -118,6 +123,7 @@ public class UnitBase : MonoBehaviour
         }
 
         BattleController.Instance.player[select].Accept(basicAttack);
+        
 
         yield return new WaitForSeconds(0.7f);
         yield return new WaitForEndOfFrame();
@@ -134,5 +140,39 @@ public class UnitBase : MonoBehaviour
         yield return new WaitForSeconds(0);
 
         //Destroy(gameObject);
+    }
+
+    public void GainExp(float val)
+    {
+        currentXp += val;
+        while (currentXp >= maxXp)
+        {
+            currentXp -= maxXp;
+            GainLevel(1);
+        }
+    }
+
+    public void GainLevel(int val)
+    {
+        float percentageHp = currentHp / maxHp;
+        float percentageMp = currentMp / maxMp;
+
+        for (int i = 0; i < val; i++)
+        {
+            maxXp = (int)((30 + maxXp) * 1.02);
+            maxHp += growthHp;
+            maxMp += growthMp;
+            att += growthAtt;
+            mag += growthMag;
+            if (unitLevel % 4 == 0)
+            {
+                def += growthDef;
+                att += growthAtt - 1;
+            }
+            unitLevel += 1;
+        }
+
+        currentHp = percentageHp * maxHp;
+        currentMp = percentageMp * maxMp;
     }
 }

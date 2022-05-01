@@ -32,6 +32,10 @@ public class BattleController : MonoBehaviour
 
     public Image[] playerGauges;
 
+    public Dictionary<string, float> lootGainedDict = new Dictionary<string, float>();
+
+    public const string EXP_GAINED = "Experience Gained";
+
     private void Awake()
     {
         if (Instance == null)
@@ -47,6 +51,8 @@ public class BattleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetupMusic();
+        lootGainedDict.Add(EXP_GAINED, 0);
         State = BattleState.START;
         StartCoroutine(SetUpBattle());
     }
@@ -58,8 +64,15 @@ public class BattleController : MonoBehaviour
         CheckTurn();
     }
 
+    private void SetupMusic()
+    {
+        GameManager.Instance.PlayBgm("BattleNormal");
+    }
+
     private IEnumerator SetUpBattle()
     {
+        float[] dataPlayer = new float[4];
+
         for (int i = 0; i < player.Length; i++)
         {
             GameObject _player = Instantiate(GameManager.Instance.playerCharacters[i], playerStations[i].position, Quaternion.identity);
@@ -69,6 +82,33 @@ public class BattleController : MonoBehaviour
             textPlayerMps[i].text = player[i].currentMp.ToString();
             textPlayerMaxHps[i].text = player[i].maxHp.ToString();
             playerGauges[i].fillAmount = player[i].turnGauge / 1000;
+        }
+
+        if (PlayerPrefs.GetInt("FirstInit") == 1)
+        {
+            for (int i = 0; i < player.Length; i++)
+            {
+                dataPlayer = GameManager.Instance.data.GetCharacterProgress(player[i]);
+                player[i].GainLevel((int)dataPlayer[0]);
+            }
+
+            foreach (var item in player)
+            {
+                item.currentXp = dataPlayer[1];
+                item.currentHp = Mathf.FloorToInt(dataPlayer[2] * item.maxHp);
+                item.currentMp = Mathf.FloorToInt(dataPlayer[3] * item.maxMp);
+            }
+
+            for (int i = 0; i < player.Length; i++)
+            {
+                textPlayerHps[i].text = player[i].currentHp.ToString();
+                textPlayerMps[i].text = player[i].currentMp.ToString();
+                textPlayerMaxHps[i].text = player[i].maxHp.ToString();
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("FirstInit", 1);
         }
 
         for (int i = 0; i < enemy.Length; i++)
@@ -192,16 +232,25 @@ public class BattleController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         unit.currentHp -= amount;
+        CheckDeath(unit);
+        UpdateHPHUDPlayer(unit);
+    }
 
+    private void CheckDeath(UnitBase unit)
+    {
         if (unit.currentHp < 1)
         {
             unit.isDead = true;
             unit.currentHp = 0;
             StartCoroutine(unit.StartDie());
+            RetrieveLoot(unit);
             UpdateEnemyList(unit);
         }
+    }
 
-        UpdateHPHUDPlayer(unit);
+    private void RetrieveLoot(UnitBase unit)
+    {
+        lootGainedDict[EXP_GAINED] += unit.xpLoot;
     }
 
     private void UpdateHPHUDPlayer(UnitBase unit)
@@ -227,9 +276,9 @@ public class BattleController : MonoBehaviour
             }
         }
 
-        print(textEnemyCounts[indexInTextNames].text);
-
-        string number = textEnemyCounts[indexInTextNames].text;
+        int number = short.Parse(textEnemyCounts[indexInTextNames].text);
+        number--;
+        textEnemyCounts[indexInTextNames].text = number.ToString();
     }
 
     public void EndTurn()
@@ -251,34 +300,62 @@ public class BattleController : MonoBehaviour
         if (!isSetupCompleted) return;
         if ((State == BattleState.WON) || (State == BattleState.LOST)) return;
 
-        int check = 0;
+        int checkEnemyDied = 0;
         foreach (var item in enemy)
         {
             if (item.isDead || item == null)
             {
-                check++;
+                checkEnemyDied++;
             }
         }
 
-        if (check == enemy.Length)
+        if (checkEnemyDied == enemy.Length)
         {
-            State = BattleState.WON;
-            BattleSceneController.Instance.WonHUD();
+            WonBattle();
         }
 
-        int check2 = 0;
+        int checkPlayerDied = 0;
         foreach (var item in player)
         {
             if (item.isDead || item == null)
             {
-                check2++;
+                checkPlayerDied++;
             }
         }
 
-        if (check2 == player.Length)
+        if (checkPlayerDied == player.Length)
         {
-            State = BattleState.LOST;
-            BattleSceneController.Instance.LoseHUD();
+            LostBattle();
+        }
+    }
+
+    public void LostBattle()
+    {
+        State = BattleState.LOST;
+        BattleSceneController.Instance.LoseHUD();
+    }
+
+    public void WonBattle()
+    {
+        State = BattleState.WON;
+        BattleSceneController.Instance.WonHUD();
+        DistributeExp();
+        SaveCharacterProgression();
+    }
+
+    public void DistributeExp()
+    {
+        foreach (var item in Instance.player)
+        {
+            item.GainExp(lootGainedDict[EXP_GAINED] / player.Length);
+        }
+    }
+
+    public void SaveCharacterProgression()
+    {
+        foreach (var item in player)
+        {
+            GameManager.Instance.data.SetCharacterProgress(item);
         }
     }
 }

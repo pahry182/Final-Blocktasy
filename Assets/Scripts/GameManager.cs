@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            PlayerPrefs.DeleteAll();
+            SetupAudio();
         }
         else
         {
@@ -141,8 +143,8 @@ public class GameManager : MonoBehaviour
         public string name;
         public AudioClip clip;
         [Range(0f, 1f)] public float volume = 1f;
-        [Range(0.1f, 3f)] public float pitch;
-        public bool loop;
+        [Range(0.1f, 3f)] public float pitch = 1f;
+        public bool loop = true;
         [HideInInspector] public AudioSource audioSource;
     }
 
@@ -175,16 +177,33 @@ public class GameManager : MonoBehaviour
 
     public class Data
     {
-        public int GetStageProgress(int stage)
+        public Vector2 GetStageProgress()
         {
-            return PlayerPrefs.GetInt("Level_" + stage);
+            return new Vector2(PlayerPrefs.GetFloat("EXPLORE_X"), PlayerPrefs.GetFloat("EXPLORE_Y"));
         }
 
-        public void SetStageProgress(int stage, int progress)
+        public void SetStageProgress(Vector2 pos)
         {
-            if (progress < GetStageProgress(stage)) return;
+            PlayerPrefs.SetFloat("EXPLORE_X", pos.x);
+            PlayerPrefs.SetFloat("EXPLORE_Y", pos.y);
+        }
 
-            PlayerPrefs.SetInt("Level_" + stage, progress);
+        public void SetCharacterProgress(UnitBase _ub)
+        {
+            PlayerPrefs.SetFloat(_ub.unitName + "_LEVEL", _ub.unitLevel);
+            PlayerPrefs.SetFloat(_ub.unitName + "_CURRENT_XP", _ub.currentXp);
+            PlayerPrefs.SetFloat(_ub.unitName + "_CURRENT_PERCENT_HP", _ub.currentHp / _ub.maxHp);
+            PlayerPrefs.SetFloat(_ub.unitName + "_CURRENT_PERCENT_MP", _ub.currentMp / _ub.maxMp);
+        }
+
+        public float[] GetCharacterProgress(UnitBase _ub)
+        {
+            float[] data = new float[4];
+            data[0] = PlayerPrefs.GetFloat(_ub.unitName + "_LEVEL");
+            data[1] = PlayerPrefs.GetFloat(_ub.unitName + "_CURRENT_XP");
+            data[2] = PlayerPrefs.GetFloat(_ub.unitName + "_CURRENT_PERCENT_HP");
+            data[3] = PlayerPrefs.GetFloat(_ub.unitName + "_CURRENT_PERCENT_MP");
+            return data;
         }
     }
 }
